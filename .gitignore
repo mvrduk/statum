@@ -1,0 +1,26 @@
+# ==========================================
+# IDE / EDITORS
+# ==========================================
+
+# GoLand / IntelliJ IDEA configuration
+.idea/
+
+
+# ==========================================
+# DOCUMENTATION / TOOLS
+# ==========================================
+
+# Local documentation
+docs/
+
+
+# ==========================================
+# ENVIRONMENT
+# ==========================================
+
+# Environment variable files and secrets
+.env
+.env.*
+
+# Keep environment variable templates
+!.env.example
