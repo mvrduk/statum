@@ -1,0 +1,19 @@
+version: "2"
+
+run:
+  timeout: 3m
+
+linters:
+  default: standard
+  enable:
+    - errorlint
+    - misspell
+  exclusions:
+    generated: lax
+    paths:
+      - internal/transport/http/gen
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

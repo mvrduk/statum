@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: statum-postgres
+    environment:
+      POSTGRES_USER: statum
+      POSTGRES_PASSWORD: statum
+      POSTGRES_DB: statum
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U statum -d statum"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migrator:
+    build:
+      context: ./services/user-service
+      target: migrator
+    environment:
+      DATABASE_URL: postgres://statum:statum@postgres:5432/statum?sslmode=disable
+    command: ["up"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build:
+      context: ./services/user-service
+      target: api
+    environment:
+      DATABASE_URL: postgres://statum:statum@postgres:5432/statum?sslmode=disable
+    ports:
+      - "8080:8080"
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_data:
