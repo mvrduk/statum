@@ -1,26 +1,22 @@
-# ==========================================
-# IDE / EDITORS
-# ==========================================
+# Go binaries
+*.exe
+*.out
+*.test
 
-# GoLand / IntelliJ IDEA configuration
+# Local binaries
+/bin/
+/dist/
+
+# IDE
 .idea/
 
-
-# ==========================================
-# DOCUMENTATION / TOOLS
-# ==========================================
-
-# Local documentation
-docs/
-
-
-# ==========================================
-# ENVIRONMENT
-# ==========================================
-
-# Environment variable files and secrets
+# Environment
 .env
 .env.*
-
-# Keep environment variable templates
 !.env.example
+
+# Ignore local configuration with secrets
+app.ini
+
+# Keep configuration template
+!app.example.ini
